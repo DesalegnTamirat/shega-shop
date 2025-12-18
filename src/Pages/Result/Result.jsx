@@ -1,30 +1,14 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { productUrl } from '../../api/endpoints';
 import Layout from '../../components/Layout/Layout';
 import Loader from '../../components/Loader/Loader';
 import ProductCard from '../../components/Product/ProductCard';
 import styles from './Result.module.css';
+import useProducts from '../../hooks/useProducts';
 
 function Result() {
-  const [results, setResults] = useState([]);
   const { categoryName } = useParams();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get(`${productUrl}/products/category/${categoryName}`)
-      .then((res) => {
-        setResults(res.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-      });
-  }, [categoryName]);
-
+  const {products: results, isLoading} = useProducts(`category/${categoryName}`)
+  
   return (
     <Layout>
       <div className={styles.resultPage}>

@@ -1,30 +1,12 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { productUrl } from '../../api/endpoints';
 import Layout from '../../components/Layout/Layout';
 import Loader from '../../components/Loader/Loader';
 import ProductCard from '../../components/Product/ProductCard';
+import useProducts from '../../hooks/useProducts';
 
 function ProductDetail() {
   const { productId } = useParams();
-  const [product, setProduct] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    axios
-      .get(`${productUrl}/products/${productId}`)
-      .then((res) => {
-        setProduct(res.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-      });
-  }, [productId]);
+  const {products: product, isLoading} = useProducts(productId);
 
   if (!product && isLoading) return <Loader />;
 
