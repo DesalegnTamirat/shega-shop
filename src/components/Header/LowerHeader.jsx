@@ -1,23 +1,35 @@
-import React from "react";
-import { AiOutlineMenu } from "react-icons/ai";
-import styles from "./header.module.css";
+import { AiOutlineMenu } from 'react-icons/ai';
+import styles from './Header.module.css';
 
-function LowerHeader() {
+const LowerHeader = () => {
   return (
-    <div className={styles.lower__container}>
+    <div className={styles.lowerHeader}>
       <ul>
-        <li>
+        <li className={styles.hoverable}>
           <AiOutlineMenu />
           <p>All</p>
         </li>
-        <li>Today's Deals</li>
-        <li>Costumer Services</li>
-        <li>Registry</li>
-        <li>Gift Cards</li>
-        <li>Sell</li>
+        <li className={styles.hoverable}>
+          <a href="/">Today's Deals</a>
+        </li>
+        <li className={styles.hoverable}>
+          <a href="/">Prime Video</a>
+        </li>
+        <li className={styles.hoverable}>
+          <a href="/">Registry</a>
+        </li>
+        <li className={styles.hoverable}>
+          <a href="/">Gift Cards</a>
+        </li>
+        <li className={styles.hoverable}>
+          <a href="/">Customer Service</a>
+        </li>
+        <li className={styles.hoverable}>
+          <a href="/">Sell</a>
+        </li>
       </ul>
     </div>
   );
-}
+};
 
 export default LowerHeader;
